@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Angular3</title>
+
+    <link rel="Stylesheet" type="text/css" href="../../Content/bootstrap.css" />
+</head>
+<body ng-controller="Index">
+    <div>
+    {{titulo}}
+    </div>
+
+    <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/i18n/angular-locale_pt-br.js"></script>
+    <script type="text/javascript" src="../../Scripts/angular-messages.min.js"></script>
+    <script type="text/javascript">
+        angular.module("myApp", []);
+        angular.module("myApp").controller("Index", index);
+
+        index.$inject = ["$scope"];
+
+        function index($scope) {
+            var vm = $scope;
+            vm.titulo = "Test";
+         };
+    </script>
+</body>
+</html>

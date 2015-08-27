@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Angular</title>
+</head>
+<body ng-app="myApp" ng-controller="EnredecoController">
+    <div>
+        <select 
+        ng-model="id" 
+        ng-change="selectAction()"
+        ng-options="x.id as x.rua group by x.uf for x in enderecos">
+        </select>
+        <br />
+    </div>
+
+    <p>
+    {{enderecoId(id).rua}}<br />
+    {{enderecoId(id).estado}}<br />
+    {{enderecoId(id).bairro}}<br />
+    {{enderecoId(id).uf}}<br />
+    {{enderecoId(id).numero}}<br />
+    </p>
+    <script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/Application/MyApp.js"></script>
+    <script type="text/javascript" src="../../Scripts/Controller/EnderecoController.js"></script>
+</body>
+</html>

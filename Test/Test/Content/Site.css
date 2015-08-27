@@ -1,0 +1,17 @@
+﻿
+        .jumbotron
+        {
+            width: 600px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .form-control
+        {
+            margin-bottom: 5px;
+        }
+        
+        .selecionado
+        {
+            background-color: ActiveCaption;
+        }

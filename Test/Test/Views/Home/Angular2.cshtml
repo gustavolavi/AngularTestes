@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Angular2</title>
+    <link rel="Stylesheet" type="text/css" href="../../Content/bootstrap.css" />
+    <link rel="Stylesheet" type="text/css" href="../../Content/Site.css" />
+    <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/angular.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/i18n/angular-locale_pt-pt.js"></script>
+    <script type="text/javascript" src="../../Scripts/angular-messages.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/Application/listaApp.js"></script>
+    <script type="text/javascript" src="../../Scripts/Controller/listaCtrl.js"></script>
+    <script type="text/javascript" src="../../Scripts/Services/contatosApiServise.js"></script>
+    </head>
+<body ng-app="listaApp" ng-controller="listaCtrl">
+    <div class="jumbotron">
+        {{msg}}
+        <br />
+        <input type="text" class="form-control" ng-model="buscar" placeholder="Buscar" />
+        <table ng-show="contatos.length > 0" class="table">
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <a href="" ng-click="ordenarPor('nome')">Nome </a>
+                </th>
+                <th>
+                    <a href="" ng-click="ordenarPor('telefone')">Telefone </a>
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Operadora
+                </th>
+            </tr>
+            <tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:buscar | orderBy:criteiroOrdenacao:direcaoOrdenacao">
+                <td>
+                    <input type="checkbox" ng-model="contato.selecionado" />
+                </td>
+                <td>
+                    {{contato.nome | uppercase}}
+                </td>
+                <td>
+                    {{contato.telefone}}
+                </td>
+                <td>
+                    {{contato.data | date:'dd/MM/yyyy HH:mm'}}
+                </td>
+                <td>
+                    {{contato.operadora.nome}}
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <form name="contatoFrom">
+        <input type="text" class="form-control" ng-minlength="5" name="nome" placeholder="Nome"
+            ng-model="contato.nome" ng-required="true" />
+        <input type="text" class="form-control" ng-pattern="/^\d{4,5}-\d{4}$/" name="telefone"
+            placeholder="Telefone" ng-model="contato.telefone" ng-required="true" />
+        <select class="form-control" ng-required="true" name="operadora" ng-model="contato.operadora"
+            ng-options="operadora.nome group by operadora.categoria for operadora in operadoras | orderBy:'nome' ">
+            <option value="">Selecione uma Operadora</option>
+        </select>
+        </form>
+        <div>
+            <button class="btn btn-primary btn-block" ng-click="adicionar(contato)" ng-disabled="contatoFrom.$invalid">
+                add</button>
+            <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="isSeleceted(contatos)">
+                delete</button>
+        </div>
+        <br />
+        <div ng-messages="contatoFrom.nome.$error" class="alert alert-danger">
+            <div ng-message="required">
+                Preencha o nome
+            </div>
+            <div ng-message="minlength">
+                Nome de conter no minimo 5 characteres
+            </div>
+        </div>
+        <div ng-messages="contatoFrom.telefone.$error" class="alert alert-danger">
+            <div ng-message="required">
+                Preencha o telefone
+            </div>
+            <div ng-message="pattern">
+                Telefone de esta no formato "99999-9999"
+            </div>
+        </div>
+        <div ng-messages="contatoFrom.operadora.$error" class="alert alert-danger">
+            <div ng-message="required">
+                Preencha a operadora
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
